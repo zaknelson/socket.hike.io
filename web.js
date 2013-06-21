@@ -1,19 +1,19 @@
 "use strict";
 
+var pg = require("pg");
 var port = process.env.PORT || 8080;
 var socketIo = require("socket.io").listen(port);
-var pg = require("pg");
+
+socketIo.configure(function () { 
+	socketIo.set("log level", 2);
+	// Heroku requires long polling https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+  socketIo.set("transports", ["xhr-polling"]); 
+  socketIo.set("polling duration", 10);
+});
 
 var connectionString = process.env.DATABASE_URL || "postgres://localhost/hikeio";
-
 var client = new pg.Client(connectionString);
 client.connect();
-
-socketIo.set("log level", 2);
-
-// Heroku requires long polling https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
-socketIo.set("transports", ["xhr-polling"]); 
-socketIo.set("polling duration", 10); 
 
 socketIo.sockets.on("connection", function (socket) {
 	socket.on("get-hikes-in-bounds", function (data) {
