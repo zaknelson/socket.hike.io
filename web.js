@@ -1,7 +1,7 @@
 "use strict";
 
 var pg = require("pg");
-var port = process.env.PORT || 8080;
+var port = parseInt(process.env.PORT, 10) || 8080;
 var socketIo = require("socket.io").listen(port);
 
 socketIo.configure(function () { 
