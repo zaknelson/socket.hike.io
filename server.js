@@ -18,6 +18,8 @@ client.connect();
 socketIo.sockets.on("connection", function (socket) {
 	socket.on("get-hikes-in-bounds", function (data) {
 
+		console.log("Getting hikes in bounds:", data);
+
 		// Longitude is tricky because it can jump from 179 to -179 across the international date line
 		var longitudeWhereClause;
 		if (data.sw.longitude < data.ne.longitude) {
@@ -37,6 +39,7 @@ socketIo.sockets.on("connection", function (socket) {
 				console.log(err);
 				return;
 			}
+			console.log("Found " + result.rows.length + " hikes");
 			socket.emit("get-hikes-in-bounds", result.rows);
 		});
 	});
