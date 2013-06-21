@@ -1,6 +1,7 @@
 "use strict";
 
-var socketIo = require("socket.io").listen(8080);
+var port = process.env.PORT || 8080;
+var socketIo = require("socket.io").listen(port);
 var pg = require("pg");
 
 var connectionString = process.env.DATABASE_URL || "postgres://localhost/hikeio";
