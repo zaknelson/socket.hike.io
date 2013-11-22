@@ -6,9 +6,6 @@ var socketIo = require("socket.io").listen(port);
 
 socketIo.configure(function () { 
 	socketIo.set("log level", 2);
-	// Heroku requires long polling https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
-  socketIo.set("transports", ["xhr-polling"]); 
-  socketIo.set("polling duration", 10);
 });
 
 var connectionString = process.env.DATABASE_URL || "postgres://localhost/hikeio";
