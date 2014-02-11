@@ -25,7 +25,7 @@ socketIo.sockets.on("connection", function (socket) {
 			longitudeWhereClause = "(locations.longitude >= $3 OR locations.longitude <= $4)";
 		}
 
-		var queryString =  "SELECT hikes.string_id, hikes.name, hike.distance, locations.latitude, locations.longitude \
+		var queryString =  "SELECT hikes.string_id, hikes.name, hikes.distance, locations.latitude, locations.longitude \
 							FROM hikes, locations \
 							WHERE locations.latitude >= $1 AND \
 								locations.latitude <= $2 AND " + longitudeWhereClause + " AND \
