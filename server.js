@@ -6,6 +6,7 @@ var socketIo = require("socket.io").listen(port);
 
 socketIo.configure(function () { 
 	socketIo.set("log level", 2);
+	socketIo.set("origins", "hike.io:*");
 });
 
 var connectionString = process.env.DATABASE_URL || "postgres://localhost/hikeio";
